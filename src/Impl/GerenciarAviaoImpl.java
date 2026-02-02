@@ -11,6 +11,7 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
     @Override
     public void cadastraAviao(Aviao aviao) {
         listaAviao.add(aviao);
+        System.out.println("Aviao cadastrado  " + aviao.toString());
     }
 
     @Override
