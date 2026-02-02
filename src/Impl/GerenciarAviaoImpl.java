@@ -18,7 +18,7 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
     public boolean excluirAviao(String codigo) {
         Aviao aviaoExcluir = buscarAviao(codigo);
         if (aviaoExcluir != null) {
-            listaAviao.remove(aviaoExcluir);
+           return listaAviao.remove(aviaoExcluir);
         }
         return false;
     }
@@ -35,8 +35,6 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
         for (Aviao a : listaAviao) {
             if (a.getCodigoIdentificador().equals(codigo)) {
                 return a;
-            } else {
-                System.out.println("Erro em encontra aviao");
             }
         }
         return null;

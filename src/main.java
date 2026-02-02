@@ -49,34 +49,43 @@ public class main {
     }
 
     private static void menuAvioes(Scanner leitor, GerenciarAviao gestor) {
-        System.out.println("\n--- SUBMENU: GERENCIAR AVIÕES ---");
-        System.out.println("1 - Cadastrar Avião (Automático)");
-        System.out.println("2 - Listar todos os Aviões");
-        System.out.println("3 - Excluir Avião por Código");
-        System.out.print("Escolha: ");
+        int subOpcao;
 
-        int subOpcao = leitor.nextInt();
-        leitor.nextLine();
+        do {
+            System.out.println("\n--- GERENCIAR AVIÕES ---");
+            System.out.println("1 - Cadastrar Avião ");
+            System.out.println("2 - Listar todos os Aviões");
+            System.out.println("3 - Excluir Avião por Código");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha: ");
 
-        switch (subOpcao) {
-            case 1:
+            subOpcao = leitor.nextInt();
+            leitor.nextLine();
 
-                gestor.cadastraAviao(new Aviao());
-                System.out.println("Avião cadastrado com sucesso!");
-                break;
-            case 2:
-                gestor.listarAviaos();
-                break;
-            case 3:
-                System.out.print("Digite o código do avião: ");
-                String codigo = leitor.nextLine();
-                if (gestor.excluirAviao(codigo)) {
-                    System.out.println("Avião removido!");
-                } else {
-                    System.out.println("Erro: Avião não encontrado.");
-                }
-                break;
-        }
+            switch (subOpcao) {
+                case 1:
+                    gestor.cadastraAviao(new Aviao());
+                    System.out.println("Avião cadastrado com sucesso!");
+                    break;
+                case 2:
+                    gestor.listarAviaos();
+                    break;
+                case 3:
+                    System.out.print("Digite o código do avião: ");
+                    String codigo = leitor.nextLine();
+                    if (gestor.excluirAviao(codigo)) {
+                        System.out.println("Avião removido!");
+                    } else {
+                        System.out.println("Erro: Avião não encontrado.");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Voltando para o menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (subOpcao != 0);
     }
 
     private static void menuPassageiros(Scanner leitor, Embarque gestor) {
@@ -88,7 +97,7 @@ public class main {
         System.out.print("Escolha: ");
 
         int subOpcao = leitor.nextInt();
-        leitor.nextLine(); // Limpa o buffer
+        leitor.nextLine();
 
         switch (subOpcao) {
             case 1:
