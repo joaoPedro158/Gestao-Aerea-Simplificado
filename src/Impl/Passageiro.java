@@ -11,14 +11,14 @@ public class Passageiro {
     private static int contador = 0;
     private int ordemChegada;
 
-    public Passageiro() {
+    public Passageiro(Prioridade prioridade) {
         Random random = new Random();
 
         String[] nomes = {"Ana", "Bruno", "Carla", "Diego", "Elena"};
         this.nome = nomes[random.nextInt(nomes.length)];
         this.documento = "DOC-" + (random.nextInt(9000) + 1000);
         this.voo = "V-100" + random.nextInt(9);
-        this.prioridade = prioridadeAleatorio();
+        this.prioridade = prioridade;
         contador++;
         this.ordemChegada = contador;
     }
@@ -29,15 +29,12 @@ public class Passageiro {
                 "nome='" + nome + '\'' +
                 ", documento='" + documento + '\'' +
                 ", voo='" + voo + '\'' +
+                ", prioridade=" + prioridade +
+                ", ordem=" + ordemChegada +
                 '}';
     }
 
-    private Prioridade prioridadeAleatorio() {
-        Random random = new Random();
-        Prioridade[] prioridades = Prioridade.values();
-        return prioridades[random.nextInt(prioridades.length)];
 
-    }
 
     public String getNome() {
         return nome;

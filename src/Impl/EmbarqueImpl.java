@@ -4,6 +4,7 @@ import Comparador.ComparadorPrioridade;
 import Interface.Embarque;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -17,13 +18,24 @@ public class EmbarqueImpl implements Embarque {
     @Override
     public void venderPassagem(Passageiro passageiro) {
         ListaPassageiroCadastrado.addLast(passageiro);
-        System.out.println("Passagem vendida para: " + passageiro.getNome());
+        System.out.println("Passagem vendida para: " + passageiro);
     }
+
+    @Override
+    public void listarPassageiroCadastrado() {
+        for (Passageiro p :  ListaPassageiroCadastrado) {
+            System.out.println(p);
+        }
+    }
+
 
     @Override
     public void cancelarPassagem(String documento) {
         Passageiro p = buscarPassageiro(documento);
-        ListaPassageiroCadastrado.remove(p);
+        if (p != null) {
+            ListaPassageiroCadastrado.remove(p);
+            System.out.println("Passagem cancelada com sucesso.");
+        }
     }
 
 

@@ -1,7 +1,7 @@
 import Impl.Aviao;
-import Impl.EmbarqueImpl;
-import Impl.GerenciarAviaoImpl;
-import Impl.Passageiro;
+
+import Enum.*;
+import Impl.*;
 import Interface.*;
 
 import java.util.Scanner;
@@ -9,47 +9,44 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args) {
 
-            Passageiro p = new Passageiro();
-        System.out.println(p);
+        Scanner leitor = new Scanner(System.in);
+        GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
+        Embarque gestorEmbarque = new EmbarqueImpl();
 
-//        Scanner leitor = new Scanner(System.in);
-//        GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
-//        Embarque gestorEmbarque = new EmbarqueImpl();
-//
-//        int opcaoPrincipal = -1;
-//
-//        while (opcaoPrincipal != 0) {
-//            System.out.println("\n=======================================");
-//            System.out.println("   SISTEMA DE GESTÃO DE EMPRESA AÉREA   ");
-//            System.out.println("========================================");
-//            System.out.println("1 - Gerenciamento de Aviões");
-//            System.out.println("2 - Gestão de Passageiros e Embarque");
-//            System.out.println("3 - Histórico de Operações");
-//            System.out.println("0 - Encerrar Sistema");
-//            System.out.print("Escolha uma opção: ");
-//
-//            opcaoPrincipal = leitor.nextInt();
-//            leitor.nextLine();
-//
-//            switch (opcaoPrincipal) {
-//                case 1:
-//                    menuAvioes(leitor, gestorAviao);
-//                    break;
-//                case 2:
-//                    menuPassageiros(leitor, gestorEmbarque);
-//                    break;
-//                case 3:
-//                    System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
-//                    gestorEmbarque.exibirFilaEmbarque();
-//                    break;
-//                case 0:
-//                    System.out.println("Encerrando o sistema... Até logo!");
-//                    break;
-//                default:
-//                    System.out.println("Opção inválida! Tente novamente.");
-//            }
-//        }
-//        leitor.close();
+        int opcaoPrincipal = -1;
+
+        while (opcaoPrincipal != 0) {
+            System.out.println("\n=======================================");
+            System.out.println("   SISTEMA DE GESTÃO DE EMPRESA AÉREA   ");
+            System.out.println("========================================");
+            System.out.println("1 - Gerenciamento de Aviões");
+            System.out.println("2 - Gestão de Passageiros e Embarque");
+            System.out.println("3 - Histórico de Operações");
+            System.out.println("0 - Encerrar Sistema");
+            System.out.print("Escolha uma opção: ");
+
+            opcaoPrincipal = leitor.nextInt();
+            leitor.nextLine();
+
+            switch (opcaoPrincipal) {
+                case 1:
+                    menuAvioes(leitor, gestorAviao);
+                    break;
+                case 2:
+                    menuPassageiros(leitor, gestorEmbarque);
+                    break;
+                case 3:
+                    System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
+                    gestorEmbarque.exibirFilaEmbarque();
+                    break;
+                case 0:
+                    System.out.println("Encerrando o sistema... Até logo!");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
+        leitor.close();
     }
 
     private static void menuAvioes(Scanner leitor, GerenciarAviao gestor) {
@@ -93,36 +90,76 @@ public class main {
     }
 
     private static void menuPassageiros(Scanner leitor, Embarque gestor) {
-        System.out.println("\n--- SUBMENU: PASSAGEIROS E EMBARQUE ---");
-        System.out.println("1 - Vender Passagem (Criar Passageiro)");
-        System.out.println("2 - Inserir na Fila Comum (FIFO)");
-        System.out.println("3 - Inserir na Fila Prioritária (Heap)");
-        System.out.println("4 - Realizar Embarque (Próximo da Fila)");
-        System.out.print("Escolha: ");
+        int subOpcao;
 
-        int subOpcao = leitor.nextInt();
-        leitor.nextLine();
+        do {
+            System.out.println("\n--- SUBMENU: PASSAGEIROS E EMBARQUE ---");
+            System.out.println("1 - Vender Passagem (Criar Passageiro)");
+            System.out.println("2 - Listar Passageiros que compraram passagem"); // Nova organização
+            System.out.println("3 - Inserir na Fila Comum (FIFO)");
+            System.out.println("4 - Inserir na Fila Prioritária (Heap)");
+            System.out.println("5 - Realizar Embarque (Próximo da Fila)");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha: ");
 
-        switch (subOpcao) {
-            case 1:
+            subOpcao = leitor.nextInt();
+            leitor.nextLine();
 
-                System.out.println("Gerando passageiro aleatório...");
-                gestor.venderPassagem(new Passageiro());
-                break;
-            case 2:
-                System.out.print("Documento do passageiro para Fila Comum: ");
-                String docComum = leitor.nextLine();
-                gestor.inserirFilaComum(docComum);
-                break;
-            case 3:
-                System.out.print("Documento do passageiro para Fila Prioritária: ");
-                String docPri = leitor.nextLine();
-                gestor.inserirFilaPrioridade(docPri);
-                break;
-            case 4:
+            switch (subOpcao) {
+                case 1:
+                    System.out.println("\n--- ESCOLHA A PRIORIDADE ---");
+                    System.out.println("1 - Idoso");
+                    System.out.println("2 - Gestante");
+                    System.out.println("3 - Deficiente");
+                    System.out.println("4 - Comum");
+                    System.out.print("Opção: ");
 
-                gestor.embacarPassageiro();
-                break;
-        }
+                    int pOpcao = leitor.nextInt();
+                    leitor.nextLine();
+
+                    Prioridade pEscolhida;
+                    switch (pOpcao) {
+                        case 1: pEscolhida = Prioridade.IDOSO; break;
+                        case 2: pEscolhida = Prioridade.GESTANTE; break;
+                        case 3: pEscolhida = Prioridade.DEFICIENTE; break;
+                        default: pEscolhida = Prioridade.COMUM; break;
+                    }
+
+
+                    Passageiro novoPassageiro = new Passageiro(pEscolhida);
+                    gestor.venderPassagem(novoPassageiro);
+                    break;
+
+                case 2:
+                    System.out.println("\n--- PASSAGEIROS AGUARDANDO FILA ---");
+                    gestor.listarPassageiroCadastrado();
+                    break;
+
+                case 3:
+                    System.out.print("Documento do passageiro para Fila Comum: ");
+                    String docComum = leitor.nextLine();
+                    gestor.inserirFilaComum(docComum);
+                    break;
+
+                case 4:
+                    System.out.print("Documento do passageiro para Fila Prioritária: ");
+                    String docPri = leitor.nextLine();
+                    gestor.inserirFilaPrioridade(docPri);
+                    break;
+
+                case 5:
+                    gestor.embacarPassageiro();
+                    break;
+
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+            }
+        } while (subOpcao != 0);
     }
 }
+
