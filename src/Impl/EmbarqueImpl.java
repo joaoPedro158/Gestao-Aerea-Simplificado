@@ -45,6 +45,7 @@ public class EmbarqueImpl implements Embarque {
        if(p != null) {
            ListaPassageiroCadastrado.remove(p);
            filaPassageiro.add(p);
+           System.out.println(" passageiro inserido \n" + p);
        }
 
     }
@@ -90,7 +91,7 @@ public class EmbarqueImpl implements Embarque {
     public void exibirFilaEmbarque() {
         System.out.println("Fila de passageiros embarcados:");
         for (Passageiro passageiro : historicoEmbarque) {
-            System.out.println(passageiro.getNome());
+            System.out.println(passageiro);
         }
     }
 }

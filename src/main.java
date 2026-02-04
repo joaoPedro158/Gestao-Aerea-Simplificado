@@ -95,10 +95,11 @@ public class main {
         do {
             System.out.println("\n--- SUBMENU: PASSAGEIROS E EMBARQUE ---");
             System.out.println("1 - Vender Passagem (Criar Passageiro)");
-            System.out.println("2 - Listar Passageiros que compraram passagem"); // Nova organização
+            System.out.println("2 - Listar Passageiros que compraram passagem");
             System.out.println("3 - Inserir na Fila Comum (FIFO)");
             System.out.println("4 - Inserir na Fila Prioritária (Heap)");
             System.out.println("5 - Realizar Embarque (Próximo da Fila)");
+            System.out.println("6 - Exibir a fila de embarque");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
 
@@ -149,6 +150,9 @@ public class main {
 
                 case 5:
                     gestor.embacarPassageiro();
+                    break;
+                case 6:
+                    gestor.exibirFilaEmbarque();
                     break;
 
                 case 0:
