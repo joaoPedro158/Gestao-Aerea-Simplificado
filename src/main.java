@@ -8,44 +8,48 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        Scanner leitor = new Scanner(System.in);
-        GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
-        Embarque gestorEmbarque = new EmbarqueImpl();
 
-        int opcaoPrincipal = -1;
+            Passageiro p = new Passageiro();
+        System.out.println(p);
 
-        while (opcaoPrincipal != 0) {
-            System.out.println("\n=======================================");
-            System.out.println("   SISTEMA DE GESTÃO DE EMPRESA AÉREA   ");
-            System.out.println("========================================");
-            System.out.println("1 - Gerenciamento de Aviões");
-            System.out.println("2 - Gestão de Passageiros e Embarque");
-            System.out.println("3 - Histórico de Operações");
-            System.out.println("0 - Encerrar Sistema");
-            System.out.print("Escolha uma opção: ");
-
-            opcaoPrincipal = leitor.nextInt();
-            leitor.nextLine();
-
-            switch (opcaoPrincipal) {
-                case 1:
-                    menuAvioes(leitor, gestorAviao);
-                    break;
-                case 2:
-                    menuPassageiros(leitor, gestorEmbarque);
-                    break;
-                case 3:
-                    System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
-                    gestorEmbarque.exibirFilaEmbarque();
-                    break;
-                case 0:
-                    System.out.println("Encerrando o sistema... Até logo!");
-                    break;
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
-            }
-        }
-        leitor.close();
+//        Scanner leitor = new Scanner(System.in);
+//        GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
+//        Embarque gestorEmbarque = new EmbarqueImpl();
+//
+//        int opcaoPrincipal = -1;
+//
+//        while (opcaoPrincipal != 0) {
+//            System.out.println("\n=======================================");
+//            System.out.println("   SISTEMA DE GESTÃO DE EMPRESA AÉREA   ");
+//            System.out.println("========================================");
+//            System.out.println("1 - Gerenciamento de Aviões");
+//            System.out.println("2 - Gestão de Passageiros e Embarque");
+//            System.out.println("3 - Histórico de Operações");
+//            System.out.println("0 - Encerrar Sistema");
+//            System.out.print("Escolha uma opção: ");
+//
+//            opcaoPrincipal = leitor.nextInt();
+//            leitor.nextLine();
+//
+//            switch (opcaoPrincipal) {
+//                case 1:
+//                    menuAvioes(leitor, gestorAviao);
+//                    break;
+//                case 2:
+//                    menuPassageiros(leitor, gestorEmbarque);
+//                    break;
+//                case 3:
+//                    System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
+//                    gestorEmbarque.exibirFilaEmbarque();
+//                    break;
+//                case 0:
+//                    System.out.println("Encerrando o sistema... Até logo!");
+//                    break;
+//                default:
+//                    System.out.println("Opção inválida! Tente novamente.");
+//            }
+//        }
+//        leitor.close();
     }
 
     private static void menuAvioes(Scanner leitor, GerenciarAviao gestor) {

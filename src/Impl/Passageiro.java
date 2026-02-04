@@ -1,12 +1,14 @@
 package Impl;
 
 import java.util.Random;
+import Enum.Prioridade;
 
 public class Passageiro {
     private String nome;
     private String documento;
     private String voo;
-    private int prioridade;
+    private Prioridade prioridade;
+    private static int contador = 0;
     private int ordemChegada;
 
     public Passageiro() {
@@ -16,7 +18,9 @@ public class Passageiro {
         this.nome = nomes[random.nextInt(nomes.length)];
         this.documento = "DOC-" + (random.nextInt(9000) + 1000);
         this.voo = "V-100" + random.nextInt(9);
-        this.prioridade = random.nextInt(3);
+        this.prioridade = prioridadeAleatorio();
+        contador++;
+        this.ordemChegada = contador;
     }
 
     @Override
@@ -26,6 +30,13 @@ public class Passageiro {
                 ", documento='" + documento + '\'' +
                 ", voo='" + voo + '\'' +
                 '}';
+    }
+
+    private Prioridade prioridadeAleatorio() {
+        Random random = new Random();
+        Prioridade[] prioridades = Prioridade.values();
+        return prioridades[random.nextInt(prioridades.length)];
+
     }
 
     public String getNome() {
@@ -40,7 +51,7 @@ public class Passageiro {
         return voo;
     }
 
-    public int getPrioridade() {
+    public Prioridade getPrioridade() {
         return prioridade;
     }
 
@@ -60,7 +71,7 @@ public class Passageiro {
         this.voo = voo;
     }
 
-    public void setPrioridade(int prioridade) {
+    public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
     }
 
