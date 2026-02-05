@@ -1,6 +1,7 @@
 package Impl;
 
-import Comparador.ComparadorPrioridade;
+import Strategy.EstrategiaPrioridadePadrao;
+import Strategy.ComparadorStrategy;
 import Interface.Embarque;
 import Enum.Operacao;
 
@@ -11,7 +12,7 @@ import java.util.Stack;
 public class EmbarqueImpl implements Embarque {
 
     LinkedList<Passageiro> filaPassageiro = new LinkedList<>();
-    PriorityQueue<Passageiro> filaPrioridade = new PriorityQueue<>(new ComparadorPrioridade());
+    PriorityQueue<Passageiro> filaPrioridade = new PriorityQueue<>(new ComparadorStrategy(new EstrategiaPrioridadePadrao()));
     LinkedList<Passageiro> ListaPassageiroCadastrado =  new LinkedList<>();
     Stack<RegistroOperacao> historicoOperacoes = new Stack<>();
     Stack<Passageiro> historicoEmbarque = new Stack<>();

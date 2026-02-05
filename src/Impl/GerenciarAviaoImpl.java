@@ -2,7 +2,6 @@ package Impl;
 
 import Interface.GerenciarAviao;
 import Enum.Operacao;
-import Iterator.AviaoIterator;
 
 import java.util.LinkedList;
 import java.util.Stack;
@@ -31,9 +30,8 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
 
     @Override
     public void listarAviaos() {
-        AviaoIterator iterator = new AviaoIterator(listaAviao);
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        for (Aviao aviao : listaAviao) {
+            System.out.println(aviao);
         }
     }
 
