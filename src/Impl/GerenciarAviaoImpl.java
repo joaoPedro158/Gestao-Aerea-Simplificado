@@ -1,16 +1,21 @@
 package Impl;
 
 import Interface.GerenciarAviao;
+import Enum.Operacao;
+import Iterator.AviaoIterator;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class GerenciarAviaoImpl implements GerenciarAviao {
 
     private LinkedList<Aviao> listaAviao = new LinkedList<>();
+    Stack<RegistroOperacao> historicoOperacoes = new Stack<>();
 
     @Override
     public void cadastraAviao(Aviao aviao) {
         listaAviao.add(aviao);
+        historicoOperacoes.push(new RegistroOperacao(Operacao.CADASTRAR_AVIAO, aviao));
         System.out.println("Aviao cadastrado  " + aviao.toString());
     }
 
@@ -18,6 +23,7 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
     public boolean excluirAviao(String codigo) {
         Aviao aviaoExcluir = buscarAviao(codigo);
         if (aviaoExcluir != null) {
+           historicoOperacoes.push(new RegistroOperacao(Operacao.REMOVER_AVIAO, aviaoExcluir));
            return listaAviao.remove(aviaoExcluir);
         }
         return false;
@@ -25,8 +31,9 @@ public class GerenciarAviaoImpl implements GerenciarAviao {
 
     @Override
     public void listarAviaos() {
-        for (Aviao aviao : listaAviao) {
-            System.out.println(aviao);
+        AviaoIterator iterator = new AviaoIterator(listaAviao);
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 

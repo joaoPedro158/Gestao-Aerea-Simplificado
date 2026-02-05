@@ -9,5 +9,7 @@ public interface Embarque {
     public void inserirFilaComum(String documento);
     public void inserirFilaPrioridade(String documento);
     public void embacarPassageiro();
-    public  void exibirFilaEmbarque();
+    public void exibirFilaEmbarque();
+    public void exibirHistoricoOperacoes();
+    public void desfazerUltimaOperacao();
 }

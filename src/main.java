@@ -36,8 +36,7 @@ public class main {
                     menuPassageiros(leitor, gestorEmbarque);
                     break;
                 case 3:
-                    System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
-                    gestorEmbarque.exibirFilaEmbarque();
+                    menuHistorico(leitor, gestorEmbarque);
                     break;
                 case 0:
                     System.out.println("Encerrando o sistema... Até logo!");
@@ -56,7 +55,8 @@ public class main {
             System.out.println("\n--- GERENCIAR AVIÕES ---");
             System.out.println("1 - Cadastrar Avião ");
             System.out.println("2 - Listar todos os Aviões");
-            System.out.println("3 - Excluir Avião por Código");
+            System.out.println("3 - Buscar Avião por Código");
+            System.out.println("4 - Excluir Avião por Código");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
 
@@ -72,6 +72,16 @@ public class main {
                     gestor.listarAviaos();
                     break;
                 case 3:
+                    System.out.print("Digite o código do avião: ");
+                    String codigoBusca = leitor.nextLine();
+                    Aviao aviaoEncontrado = gestor.buscarAviao(codigoBusca);
+                    if (aviaoEncontrado != null) {
+                        System.out.println("Avião encontrado: " + aviaoEncontrado);
+                    } else {
+                        System.out.println("Avião não encontrado.");
+                    }
+                    break;
+                case 4:
                     System.out.print("Digite o código do avião: ");
                     String codigo = leitor.nextLine();
                     if (gestor.excluirAviao(codigo)) {
@@ -100,6 +110,8 @@ public class main {
             System.out.println("4 - Inserir na Fila Prioritária (Heap)");
             System.out.println("5 - Realizar Embarque (Próximo da Fila)");
             System.out.println("6 - Exibir a fila de embarque");
+            System.out.println("7 - Exibir histórico de operações");
+            System.out.println("8 - Desfazer última operação");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
 
@@ -154,11 +166,47 @@ public class main {
                 case 6:
                     gestor.exibirFilaEmbarque();
                     break;
+                case 7:
+                    gestor.exibirHistoricoOperacoes();
+                    break;
+                case 8:
+                    gestor.desfazerUltimaOperacao();
+                    break;
 
                 case 0:
                     System.out.println("Voltando ao menu principal...");
                     break;
 
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+            }
+        } while (subOpcao != 0);
+    }
+
+    private static void menuHistorico(Scanner leitor, Embarque gestor) {
+        int subOpcao;
+
+        do {
+            System.out.println("\n--- HISTÓRICO DE OPERAÇÕES ---");
+            System.out.println("1 - Exibir histórico completo");
+            System.out.println("2 - Desfazer última operação");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha: ");
+
+            subOpcao = leitor.nextInt();
+            leitor.nextLine();
+
+            switch (subOpcao) {
+                case 1:
+                    gestor.exibirHistoricoOperacoes();
+                    break;
+                case 2:
+                    gestor.desfazerUltimaOperacao();
+                    break;
+                case 0:
+                    System.out.println("Voltando para o menu principal...");
+                    break;
                 default:
                     System.out.println("Opção inválida! Tente novamente.");
                     break;

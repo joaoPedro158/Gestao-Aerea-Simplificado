@@ -30,7 +30,9 @@ public class Aviao {
     }
 
     public void codigoAleatorio() {
-
+        Random gerador = new Random();
+        this.codigoIdentificador = "AV-" + (gerador.nextInt(900) + 100);
+        System.out.println("Código atualizado para: " + this.codigoIdentificador);
     }
 
     public String getCodigoIdentificador() {
