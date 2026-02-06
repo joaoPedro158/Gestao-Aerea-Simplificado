@@ -16,7 +16,7 @@ public class Aviao {
         String[] modelosDisponiveis = {"Boeing 737", "Airbus A320", "Embraer 195"};
         this.modelo = modelosDisponiveis[gerador.nextInt(modelosDisponiveis.length)];
 
-        this.capacidadeMaxima = gerador.nextInt(201) + 100;
+        this.capacidadeMaxima = gerador.nextInt(1) + 10;
 
     }
 
@@ -27,12 +27,6 @@ public class Aviao {
                 ", modelo='" + modelo + '\'' +
                 ", capacidadeMaxima=" + capacidadeMaxima +
                 '}';
-    }
-
-    public void codigoAleatorio() {
-        Random gerador = new Random();
-        this.codigoIdentificador = "AV-" + (gerador.nextInt(900) + 100);
-        System.out.println("Código atualizado para: " + this.codigoIdentificador);
     }
 
     public String getCodigoIdentificador() {

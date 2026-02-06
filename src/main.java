@@ -12,7 +12,7 @@ public class main {
         Scanner leitor = new Scanner(System.in);
         GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
         Embarque gestorEmbarque = new EmbarqueImpl();
-
+        GerenciarVoo gestorVoo = new GerenciarVooImpl();
         int opcaoPrincipal = -1;
 
         while (opcaoPrincipal != 0) {
@@ -20,8 +20,9 @@ public class main {
             System.out.println("   SISTEMA DE GESTÃO DE EMPRESA AÉREA   ");
             System.out.println("========================================");
             System.out.println("1 - Gerenciamento de Aviões");
-            System.out.println("2 - Gestão de Passageiros e Embarque");
-            System.out.println("3 - Histórico de Operações");
+            System.out.println("2 - Gerenciar voo");
+            System.out.println("3 - Gestão de Passageiros e Embarque");
+            System.out.println("4 - Histórico de Operações");
             System.out.println("0 - Encerrar Sistema");
             System.out.print("Escolha uma opção: ");
 
@@ -33,12 +34,18 @@ public class main {
                     menuAvioes(leitor, gestorAviao);
                     break;
                 case 2:
-                    menuPassageiros(leitor, gestorEmbarque);
+
+                    menuVoo(leitor,gestorVoo,gestorAviao );
                     break;
                 case 3:
+                    menuPassageiros(leitor, gestorEmbarque, gestorVoo);
+
+                    break;
+                case 4:
                     menuHistorico(leitor, gestorEmbarque);
                     break;
                 case 0:
+
                     System.out.println("Encerrando o sistema... Até logo!");
                     break;
                 default:
@@ -99,7 +106,7 @@ public class main {
         } while (subOpcao != 0);
     }
 
-    private static void menuPassageiros(Scanner leitor, Embarque gestor) {
+    private static void menuPassageiros(Scanner leitor, Embarque gestor, GerenciarVoo gestorVoo) {
         int subOpcao;
 
         do {
@@ -138,8 +145,12 @@ public class main {
                         default: pEscolhida = Prioridade.COMUM; break;
                     }
 
+                    gestorVoo.listarVoos();
+                    System.out.println("Escolha um Voo:");
+                    String pVoo = leitor.nextLine();
+                    Voo vooEscolhido = gestorVoo.procuraVoo(pVoo);
 
-                    Passageiro novoPassageiro = new Passageiro(pEscolhida);
+                    Passageiro novoPassageiro = new Passageiro(pEscolhida, vooEscolhido);
                     gestor.venderPassagem(novoPassageiro);
                     break;
 
@@ -210,6 +221,65 @@ public class main {
                 default:
                     System.out.println("Opção inválida! Tente novamente.");
                     break;
+            }
+        } while (subOpcao != 0);
+    }
+
+    private static void menuVoo(Scanner leitor, GerenciarVoo gestorVoo, GerenciarAviao gestorAviao) {
+        int subOpcao;
+        String codigoAviao;
+        do {
+            System.out.println("\n--- GERENCIAR Voo ---");
+            System.out.println("1 - Cadastrar Voo ");
+            System.out.println("2 - Listar todos os Voo");
+            System.out.println("3 - Buscar Voo por Código");
+            System.out.println("4 - Excluir Voo por Código");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha: ");
+
+            subOpcao = leitor.nextInt();
+            leitor.nextLine();
+
+            switch (subOpcao) {
+                case 1:
+                    System.out.println(" Digite o código do Avião para cadastra o Voo:");
+                    codigoAviao = leitor.nextLine();
+                    Aviao aviao = gestorAviao.buscarAviao(codigoAviao);
+                    if (aviao != null) {
+                        Voo voo = new Voo(aviao);
+                        gestorVoo.CadastrarVoo(voo);
+                        System.out.println("Voo cadastrado com sucesso!" + voo);
+                    } else {
+                        System.out.println("Erro!! avião nao encontrado!");
+                    }
+                    break;
+                case 2:
+                    gestorVoo.listarVoos();
+                    break;
+                case 3:
+                    System.out.print("Digite o código do Voo: ");
+                    String codigoBusca = leitor.nextLine();
+                    Voo vooEncontrado = gestorVoo.procuraVoo(codigoBusca);
+                    if (vooEncontrado != null) {
+                        System.out.println("Voo encontrado: " + vooEncontrado);
+                    } else {
+                        System.out.println("Voo não encontrado.");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Digite o código do Voo: ");
+                    String codigo = leitor.nextLine();
+                    if (gestorVoo.cancelarVoo(codigo)) {
+                        System.out.println("Voo removido!");
+                    } else {
+                        System.out.println("Erro: Voo não encontrado.");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Voltando para o menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
             }
         } while (subOpcao != 0);
     }

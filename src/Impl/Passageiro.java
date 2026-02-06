@@ -6,18 +6,18 @@ import Enum.Prioridade;
 public class Passageiro {
     private String nome;
     private String documento;
-    private String voo;
+    private Voo voo;
     private Prioridade prioridade;
     private static int contador = 0;
     private int ordemChegada;
 
-    public Passageiro(Prioridade prioridade) {
+    public Passageiro(Prioridade prioridade, Voo voo) {
         Random random = new Random();
 
         String[] nomes = {"Ana", "Bruno", "Carla", "Diego", "Elena"};
         this.nome = nomes[random.nextInt(nomes.length)];
         this.documento = "DOC-" + (random.nextInt(9000) + 1000);
-        this.voo = "V-100" + random.nextInt(9);
+        this.voo = voo;
         this.prioridade = prioridade;
         contador++;
         this.ordemChegada = contador;
@@ -28,32 +28,10 @@ public class Passageiro {
         return "Passageiro{" +
                 "nome='" + nome + '\'' +
                 ", documento='" + documento + '\'' +
-                ", voo='" + voo + '\'' +
+                ", voo=" + voo +
                 ", prioridade=" + prioridade +
-                ", ordem=" + ordemChegada +
+                ", ordemChegada=" + ordemChegada +
                 '}';
-    }
-
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public String getVoo() {
-        return voo;
-    }
-
-    public Prioridade getPrioridade() {
-        return prioridade;
-    }
-
-    public int getOrdemChegada() {
-        return ordemChegada;
     }
 
     public void setNome(String nome) {
@@ -64,7 +42,7 @@ public class Passageiro {
         this.documento = documento;
     }
 
-    public void setVoo(String voo) {
+    public void setVoo(Voo voo) {
         this.voo = voo;
     }
 
@@ -72,7 +50,35 @@ public class Passageiro {
         this.prioridade = prioridade;
     }
 
+    public static void setContador(int contador) {
+        Passageiro.contador = contador;
+    }
+
     public void setOrdemChegada(int ordemChegada) {
         this.ordemChegada = ordemChegada;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public Voo getVoo() {
+        return voo;
+    }
+
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public static int getContador() {
+        return contador;
+    }
+
+    public int getOrdemChegada() {
+        return ordemChegada;
     }
 }
