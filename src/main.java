@@ -231,7 +231,7 @@ public class main {
         do {
             System.out.println("\n--- GERENCIAR Voo ---");
             System.out.println("1 - Cadastrar Voo ");
-            System.out.println("2 - Listar todos os Voo");
+            System.out.println("2 - Listar Voos");
             System.out.println("3 - Buscar Voo por Código");
             System.out.println("4 - Excluir Voo por Código");
             System.out.println("0 - Voltar");
@@ -249,7 +249,6 @@ public class main {
                     if (aviao != null) {
                         Voo voo = new Voo(aviao);
                         gestorVoo.CadastrarVoo(voo);
-                        System.out.println("Voo cadastrado com sucesso!" + voo);
                     } else {
                         System.out.println("Erro!! avião nao encontrado!");
                     }

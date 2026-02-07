@@ -16,7 +16,7 @@ public class Aviao {
         String[] modelosDisponiveis = {"Boeing 737", "Airbus A320", "Embraer 195"};
         this.modelo = modelosDisponiveis[gerador.nextInt(modelosDisponiveis.length)];
 
-        this.capacidadeMaxima = gerador.nextInt(1) + 10;
+        this.capacidadeMaxima = gerador.nextInt(10) + 1;
 
     }
 

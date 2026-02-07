@@ -1,16 +1,33 @@
 package Impl;
 
+import Interface.GerenciarAviao;
 import Interface.GerenciarVoo;
+import Strategy.EstrategiaVoo;
 
 import java.util.LinkedList;
+
+
 
 public class GerenciarVooImpl implements GerenciarVoo {
 
     private LinkedList<Voo> listaVoos = new LinkedList<>();
+
+    private GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
+
     @Override
     public void CadastrarVoo(Voo voo) {
-        listaVoos.add(voo);
-        System.out.println("Voo cadastrado com sucesso! \n" + voo);
+       String codigoAviao = voo.getAviao().getCodigoIdentificador();
+
+       boolean aviaoOcupado = false;
+       for (Voo v : listaVoos) {
+           if (v.getAviao().getCodigoIdentificador().equals(codigoAviao)) {
+               aviaoOcupado = true;
+               System.out.println("Esse aviao ja esta cadastrado em um voo ");
+               break;
+           }
+       }
+       listaVoos.add(voo);
+
     }
 
     @Override
