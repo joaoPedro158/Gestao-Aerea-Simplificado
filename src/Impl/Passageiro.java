@@ -25,13 +25,8 @@ public class Passageiro {
 
     @Override
     public String toString() {
-        return "Passageiro{" +
-                "nome='" + nome + '\'' +
-                ", documento='" + documento + '\'' +
-                ", voo=" + voo +
-                ", prioridade=" + prioridade +
-                ", ordemChegada=" + ordemChegada +
-                '}';
+        return String.format("[#%03d] %-15s | Doc: %-10s | Voo: %s | Prioridade: %s",
+                ordemChegada, nome, documento, voo.getCodigoVoo(), prioridade);
     }
 
     public void setNome(String nome) {

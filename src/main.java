@@ -127,31 +127,38 @@ public class main {
 
             switch (subOpcao) {
                 case 1:
-                    System.out.println("\n--- ESCOLHA A PRIORIDADE ---");
-                    System.out.println("1 - Idoso");
-                    System.out.println("2 - Gestante");
-                    System.out.println("3 - Deficiente");
-                    System.out.println("4 - Comum");
-                    System.out.print("Opção: ");
-
-                    int pOpcao = leitor.nextInt();
-                    leitor.nextLine();
-
-                    Prioridade pEscolhida;
-                    switch (pOpcao) {
-                        case 1: pEscolhida = Prioridade.IDOSO; break;
-                        case 2: pEscolhida = Prioridade.GESTANTE; break;
-                        case 3: pEscolhida = Prioridade.DEFICIENTE; break;
-                        default: pEscolhida = Prioridade.COMUM; break;
-                    }
 
                     gestorVoo.listarVoos();
                     System.out.println("Escolha um Voo:");
                     String pVoo = leitor.nextLine();
-                    Voo vooEscolhido = gestorVoo.procuraVoo(pVoo);
+                    if (gestorVoo.verificarDisponibilidade(pVoo)) {
+                        Voo vooEscolhido = gestorVoo.procuraVoo(pVoo);
+                        System.out.println("\n--- ESCOLHA A PRIORIDADE ---");
+                        System.out.println("1 - Idoso");
+                        System.out.println("2 - Gestante");
+                        System.out.println("3 - Deficiente");
+                        System.out.println("4 - Comum");
+                        System.out.print("Opção: ");
 
-                    Passageiro novoPassageiro = new Passageiro(pEscolhida, vooEscolhido);
-                    gestor.venderPassagem(novoPassageiro);
+                        int pOpcao = leitor.nextInt();
+                        leitor.nextLine();
+
+                        Prioridade pEscolhida;
+                        switch (pOpcao) {
+                            case 1: pEscolhida = Prioridade.IDOSO; break;
+                            case 2: pEscolhida = Prioridade.GESTANTE; break;
+                            case 3: pEscolhida = Prioridade.DEFICIENTE; break;
+                            default: pEscolhida = Prioridade.COMUM; break;
+                        }
+
+                        Passageiro novoPassageiro = new Passageiro(pEscolhida, vooEscolhido);
+                        gestor.venderPassagem(novoPassageiro);
+                        vooEscolhido.incrementarPassageiro();
+                    } else {
+                        System.out.println("Não foi possível realizar a venda para este voo.");
+                    }
+
+
                     break;
 
                 case 2:

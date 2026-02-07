@@ -41,6 +41,20 @@ public class GerenciarVooImpl implements GerenciarVoo {
     }
 
     @Override
+    public boolean verificarDisponibilidade(String codigoVoo) {
+        Voo voo = procuraVoo(codigoVoo);
+        if (voo != null) {
+            if (voo.temVaga()) {
+                return true;
+            } else {
+                System.out.println("[LOTADO] O voo " + codigoVoo + " já atingiu a capacidade máxima!");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void listarVoos() {
         for (Voo v : listaVoos) {
             System.out.println(v);

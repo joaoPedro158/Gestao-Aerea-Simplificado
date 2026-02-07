@@ -9,6 +9,7 @@ public class Voo {
     private String destinoFinal;
     private LocalDateTime dataVoo;
     private String codigoVoo;
+    private int passageirosCadastrados;
 
     public Voo(Aviao aviao) {
         Random random = new Random();
@@ -27,11 +28,20 @@ public class Voo {
                 .plusMinutes(random.nextInt(60));
     }
 
+    public boolean temVaga() {
+        return passageirosCadastrados < aviao.getCapacidadeMaxima();
+    }
+
+    public void incrementarPassageiro() {
+        this.passageirosCadastrados++;
+    }
+
     @Override
     public String toString() {
+        int vagasRestantes = aviao.getCapacidadeMaxima() - passageirosCadastrados;
         return String.format(
                 "-------------------------------------------------------+" +
-                        "\n| VOO: %-8s | AERONAVE: %-22s |" +
+                        "\n| VOO: %-8s | AERONAVE: %-22s | VAGAS: %-3d | " +
                         "\n+-------------------------------------------------------+" +
                         "\n| ORIGEM:  %-20s                 |" +
                         "\n| DESTINO: %-20s                 |" +
@@ -39,6 +49,7 @@ public class Voo {
                         "\n+-------------------------------------------------------+",
                 codigoVoo,
                 aviao.getCodigoIdentificador(),
+                vagasRestantes,
                 destinoPartida,
                 destinoFinal,
                 dataVoo.toString().substring(0, 16).replace("T", " ")
