@@ -242,6 +242,7 @@ public class main {
 
             switch (subOpcao) {
                 case 1:
+                    gestorAviao.listarAviaos();
                     System.out.println(" Digite o código do Avião para cadastra o Voo:");
                     codigoAviao = leitor.nextLine();
                     Aviao aviao = gestorAviao.buscarAviao(codigoAviao);

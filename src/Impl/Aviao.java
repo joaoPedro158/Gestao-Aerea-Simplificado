@@ -22,11 +22,18 @@ public class Aviao {
 
     @Override
     public String toString() {
-        return "Aviao{" +
-                "codigoIdentificador='" + codigoIdentificador + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", capacidadeMaxima=" + capacidadeMaxima +
-                '}';
+        return String.format(
+                "+---------------------------------------+" +
+                        "\n  | FICHA TÉCNICA DA AERONAVE             |" +
+                        "\n  +---------------------------------------+" +
+                        "\n    ID:       %-20s" +
+                        "\n    MODELO:   %-20s" +
+                        "\n    ASSENTOS: %-20d" +
+                        "\n  +---------------------------------------+",
+                codigoIdentificador,
+                modelo,
+                capacidadeMaxima
+        );
     }
 
     public String getCodigoIdentificador() {

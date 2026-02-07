@@ -29,13 +29,20 @@ public class Voo {
 
     @Override
     public String toString() {
-        return "Voo{" +
-                "destinoPartida='" + destinoPartida + '\'' +
-                ", aviao=" + aviao +
-                ", destinoFinal='" + destinoFinal + '\'' +
-                ", dataVoo=" + dataVoo +
-                ", codigoVoo='" + codigoVoo + '\'' +
-                '}';
+        return String.format(
+                "-------------------------------------------------------+" +
+                        "\n| VOO: %-8s | AERONAVE: %-22s |" +
+                        "\n+-------------------------------------------------------+" +
+                        "\n| ORIGEM:  %-20s                 |" +
+                        "\n| DESTINO: %-20s                 |" +
+                        "\n| DATA/HORA: %-18s                 |" +
+                        "\n+-------------------------------------------------------+",
+                codigoVoo,
+                aviao.getCodigoIdentificador(),
+                destinoPartida,
+                destinoFinal,
+                dataVoo.toString().substring(0, 16).replace("T", " ")
+        );
     }
 
     public void setDestinoPartida(String destinoPartida) {
