@@ -1,13 +1,13 @@
 package Impl;
 
+import Comparador.ComparadorPrioridade;
 import Strategy.EstrategiaPrioridadePadrao;
 import Strategy.ComparadorStrategy;
 import Interface.Embarque;
 import Enum.Operacao;
+import  Enum.Prioridade;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.util.*;
 
 public class EmbarqueImpl implements Embarque {
 
@@ -26,6 +26,7 @@ public class EmbarqueImpl implements Embarque {
 
     @Override
     public void listarPassageiroCadastrado() {
+        ListaPassageiroCadastrado.sort(new ComparadorPrioridade());
         for (Passageiro p :  ListaPassageiroCadastrado) {
             System.out.println(p);
         }
@@ -77,6 +78,39 @@ public class EmbarqueImpl implements Embarque {
     }
 
     @Override
+    public void imprimirFilas() {
+
+        System.out.println("\n===========================================================");
+        System.out.println("                STATUS ATUAL DAS FILAS DE EMBARQUE        ");
+        System.out.println("===========================================================");
+
+        List<Passageiro> lisaTemporaria = new ArrayList<>(filaPrioridade);
+        lisaTemporaria.sort(new ComparadorPrioridade());
+
+        System.out.println("\n> FILA PRIORITÁRIA  <");
+        if (lisaTemporaria.isEmpty()) {
+            System.out.println("[ Vazia ]");
+        } else {
+            for (Passageiro p : lisaTemporaria) {
+                System.out.println(p);
+            }
+        }
+
+        System.out.println("\n-----------------------------------------------------------");
+
+        System.out.println(">>> FILA COMUM (FIFO) <<<");
+        if (filaPassageiro.isEmpty()) {
+            System.out.println("[ Vazia ]");
+        } else {
+            for (Passageiro p : filaPassageiro) {
+                System.out.println(p);
+            }
+        }
+        System.out.println("\n===========================================================");
+
+    }
+
+    @Override
     public void embacarPassageiro() {
        if (!filaPrioridade.isEmpty()) {
            Passageiro p = filaPrioridade.poll();
@@ -105,9 +139,13 @@ public class EmbarqueImpl implements Embarque {
 
     @Override
     public void exibirHistoricoOperacoes() {
-        System.out.println("Histórico de operações de embarque:");
-        for (Passageiro passageiro : historicoEmbarque) {
-            System.out.println("Embarcado: " + passageiro);
+        System.out.println("\n--- LOG DE TRANSAÇÕES DO SISTEMA ---");
+        if (historicoOperacoes.isEmpty()) {
+            System.out.println("Nenhuma operação registrada.");
+            return;
+        }
+        for (RegistroOperacao reg : historicoOperacoes) {
+            System.out.println(reg);
         }
     }
 
@@ -146,10 +184,11 @@ public class EmbarqueImpl implements Embarque {
             case EMBARCAR_PASSAGEIRO:
                 Passageiro p5 = (Passageiro) ultimaOperacao.getDados();
                 historicoEmbarque.pop();
-                if (p5.getPrioridade().getValor() > 0) {
-                    filaPrioridade.add(p5);
-                } else {
+                if (p5.getPrioridade() == Prioridade.COMUM) {
+
                     filaPassageiro.addFirst(p5);
+                } else {
+                    filaPrioridade.add(p5);
                 }
                 System.out.println("Embarque de " + p5.getNome() + " desfeito.");
                 break;

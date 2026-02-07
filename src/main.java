@@ -115,10 +115,11 @@ public class main {
             System.out.println("2 - Listar Passageiros que compraram passagem");
             System.out.println("3 - Inserir na Fila Comum (FIFO)");
             System.out.println("4 - Inserir na Fila Prioritária (Heap)");
-            System.out.println("5 - Realizar Embarque (Próximo da Fila)");
-            System.out.println("6 - Exibir a fila de embarque");
-            System.out.println("7 - Exibir histórico de operações");
-            System.out.println("8 - Desfazer última operação");
+            System.out.println("5 - VISUALIZAR FILAS DE EMBARQUE (Painel)");
+            System.out.println("6 - Realizar Embarque (Próximo da Fila)");
+            System.out.println("7 - Exibir Passageiros Já Embarcados");
+            System.out.println("8 - Desfazer Última Operação");
+            System.out.println("9 - Ver historico de operação");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
 
@@ -127,17 +128,14 @@ public class main {
 
             switch (subOpcao) {
                 case 1:
-
                     gestorVoo.listarVoos();
-                    System.out.println("Escolha um Voo:");
+                    System.out.print("Escolha o Código do Voo: ");
                     String pVoo = leitor.nextLine();
+
                     if (gestorVoo.verificarDisponibilidade(pVoo)) {
                         Voo vooEscolhido = gestorVoo.procuraVoo(pVoo);
                         System.out.println("\n--- ESCOLHA A PRIORIDADE ---");
-                        System.out.println("1 - Idoso");
-                        System.out.println("2 - Gestante");
-                        System.out.println("3 - Deficiente");
-                        System.out.println("4 - Comum");
+                        System.out.println("1 - Idoso | 2 - Gestante | 3 - Deficiente | 4 - Comum");
                         System.out.print("Opção: ");
 
                         int pOpcao = leitor.nextInt();
@@ -154,41 +152,44 @@ public class main {
                         Passageiro novoPassageiro = new Passageiro(pEscolhida, vooEscolhido);
                         gestor.venderPassagem(novoPassageiro);
                         vooEscolhido.incrementarPassageiro();
-                    } else {
-                        System.out.println("Não foi possível realizar a venda para este voo.");
                     }
-
-
                     break;
 
                 case 2:
-                    System.out.println("\n--- PASSAGEIROS AGUARDANDO FILA ---");
                     gestor.listarPassageiroCadastrado();
                     break;
 
                 case 3:
-                    System.out.print("Documento do passageiro para Fila Comum: ");
-                    String docComum = leitor.nextLine();
-                    gestor.inserirFilaComum(docComum);
+                    gestor.listarPassageiroCadastrado();
+                    System.out.print("Documento para Fila Comum: ");
+                    gestor.inserirFilaComum(leitor.nextLine());
                     break;
 
                 case 4:
-                    System.out.print("Documento do passageiro para Fila Prioritária: ");
-                    String docPri = leitor.nextLine();
-                    gestor.inserirFilaPrioridade(docPri);
+                    gestor.listarPassageiroCadastrado();
+                    System.out.print("Documento para Fila Prioritária: ");
+                    gestor.inserirFilaPrioridade(leitor.nextLine());
                     break;
 
                 case 5:
+
+                    gestor.imprimirFilas();
+                    break;
+
+                case 6:
                     gestor.embacarPassageiro();
                     break;
-                case 6:
+
+                case 7:
                     gestor.exibirFilaEmbarque();
                     break;
-                case 7:
-                    gestor.exibirHistoricoOperacoes();
-                    break;
+
                 case 8:
                     gestor.desfazerUltimaOperacao();
+                    break;
+
+                case 9:
+                    gestor.exibirHistoricoOperacoes();
                     break;
 
                 case 0:
@@ -196,12 +197,11 @@ public class main {
                     break;
 
                 default:
-                    System.out.println("Opção inválida! Tente novamente.");
+                    System.out.println("Opção inválida!");
                     break;
             }
         } while (subOpcao != 0);
     }
-
     private static void menuHistorico(Scanner leitor, Embarque gestor) {
         int subOpcao;
 

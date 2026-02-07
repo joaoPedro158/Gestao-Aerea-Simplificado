@@ -8,6 +8,7 @@ public interface Embarque {
     public void cancelarPassagem(String documento);
     public void inserirFilaComum(String documento);
     public void inserirFilaPrioridade(String documento);
+    public void imprimirFilas();
     public void embacarPassageiro();
     public void exibirFilaEmbarque();
     public void exibirHistoricoOperacoes();

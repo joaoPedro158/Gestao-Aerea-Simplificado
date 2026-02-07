@@ -12,22 +12,19 @@ public class GerenciarVooImpl implements GerenciarVoo {
 
     private LinkedList<Voo> listaVoos = new LinkedList<>();
 
-    private GerenciarAviao gestorAviao = new GerenciarAviaoImpl();
 
     @Override
     public void CadastrarVoo(Voo voo) {
        String codigoAviao = voo.getAviao().getCodigoIdentificador();
 
-       boolean aviaoOcupado = false;
        for (Voo v : listaVoos) {
            if (v.getAviao().getCodigoIdentificador().equals(codigoAviao)) {
-               aviaoOcupado = true;
-               System.out.println("Esse aviao ja esta cadastrado em um voo ");
-               break;
+               System.out.println("\n[ERRO] O avião " + codigoAviao + " já está alocado em outro voo!");
+               return;
            }
        }
        listaVoos.add(voo);
-
+        System.out.println("\n[SUCESSO] Voo " + voo.getCodigoVoo() + " cadastrado com o avião " + codigoAviao);
     }
 
     @Override
@@ -56,6 +53,7 @@ public class GerenciarVooImpl implements GerenciarVoo {
 
     @Override
     public void listarVoos() {
+        listaVoos.sort(new EstrategiaVoo());
         for (Voo v : listaVoos) {
             System.out.println(v);
         }
