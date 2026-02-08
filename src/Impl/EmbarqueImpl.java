@@ -98,7 +98,7 @@ public class EmbarqueImpl implements Embarque {
 
         System.out.println("\n-----------------------------------------------------------");
 
-        System.out.println(">>> FILA COMUM (FIFO) <<<");
+        System.out.println(">>> FILA COMUM  <<<");
         if (filaPassageiro.isEmpty()) {
             System.out.println("[ Vazia ]");
         } else {
@@ -110,22 +110,22 @@ public class EmbarqueImpl implements Embarque {
 
     }
 
-    @Override
-    public void embacarPassageiro() {
-       if (!filaPrioridade.isEmpty()) {
-           Passageiro p = filaPrioridade.poll();
-           System.out.println("Embarque de prioridade " + p.getNome());
-           historicoEmbarque.push(p);
-           historicoOperacoes.push(new RegistroOperacao(Operacao.EMBARCAR_PASSAGEIRO, p));
-       } else if (!filaPassageiro.isEmpty()) {
-           Passageiro p = filaPassageiro.removeFirst();
-           System.out.println("Embarque  comum " + p.getNome());
-           historicoEmbarque.push(p);
-           historicoOperacoes.push(new RegistroOperacao(Operacao.EMBARCAR_PASSAGEIRO, p));
-       } else {
-           System.out.println("Passageiro nao encontrado");
-       }
-    }
+        @Override
+        public void embacarPassageiro() {
+           if (!filaPrioridade.isEmpty()) {
+               Passageiro p = filaPrioridade.poll();
+               System.out.println("Embarque de prioridade " + p.getNome());
+               historicoEmbarque.push(p);
+               historicoOperacoes.push(new RegistroOperacao(Operacao.EMBARCAR_PASSAGEIRO, p));
+           } else if (!filaPassageiro.isEmpty()) {
+               Passageiro p = filaPassageiro.removeFirst();
+               System.out.println("Embarque  comum " + p.getNome());
+               historicoEmbarque.push(p);
+               historicoOperacoes.push(new RegistroOperacao(Operacao.EMBARCAR_PASSAGEIRO, p));
+           } else {
+               System.out.println("Passageiro nao encontrado");
+           }
+        }
 
 
 
