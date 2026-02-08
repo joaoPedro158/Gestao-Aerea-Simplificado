@@ -111,12 +111,12 @@ public class main {
 
         do {
             System.out.println("\n--- SUBMENU: PASSAGEIROS E EMBARQUE ---");
-            System.out.println("1 - Vender Passagem (Criar Passageiro)");
+            System.out.println("1 - Vender Passagem ");
             System.out.println("2 - Listar Passageiros que compraram passagem");
-            System.out.println("3 - Inserir na Fila Comum (FIFO)");
-            System.out.println("4 - Inserir na Fila Prioritária (Heap)");
+            System.out.println("3 - Inserir na Fila Comum ");
+            System.out.println("4 - Inserir na Fila Prioritária ");
             System.out.println("5 - VISUALIZAR FILAS DE EMBARQUE (Painel)");
-            System.out.println("6 - Realizar Embarque (Próximo da Fila)");
+            System.out.println("6 - Realizar Embarque ");
             System.out.println("7 - Exibir Passageiros Já Embarcados");
             System.out.println("8 - Desfazer Última Operação");
             System.out.println("9 - Ver historico de operação");
